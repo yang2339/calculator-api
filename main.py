@@ -5,7 +5,12 @@ app = FastAPI()
 
 @app.get("/", status_code=200)
 def read_root():
-    """Health check endpoint"""
+    """
+    Health check endpoint.
+
+    Returns:
+    - JSON object indicating that the API is running successfully
+    """
     return {"status": "healthy"}
 
 
@@ -13,6 +18,16 @@ def read_root():
 def add(a: str, b: str):
     """
     Add two numbers together.
+
+    Parameters:
+    - a: First number
+    - b: Second number
+
+    Returns:
+    - JSON object containing the operation name, input values, and sum
+
+    Raises:
+    - 422 error if either argument is not a valid number
     """
     try:
         a = float(a)
@@ -20,7 +35,7 @@ def add(a: str, b: str):
     except ValueError:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail="Both 'a' and 'b' must be valid numbers"
+            detail="Both 'a' and 'b' must be valid numbers."
         )
 
     return {"operation": "add", "a": a, "b": b, "result": a + b}
@@ -30,6 +45,16 @@ def add(a: str, b: str):
 def subtract(a: str, b: str):
     """
     Subtract the second number from the first number.
+
+    Parameters:
+    - a: First number
+    - b: Second number
+
+    Returns:
+    - JSON object containing the operation name, input values, and difference
+
+    Raises:
+    - 422 error if either argument is not a valid number
     """
     try:
         a = float(a)
@@ -37,7 +62,7 @@ def subtract(a: str, b: str):
     except ValueError:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail="Both 'a' and 'b' must be valid numbers"
+            detail="Both 'a' and 'b' must be valid numbers."
         )
 
     return {"operation": "subtract", "a": a, "b": b, "result": a - b}
@@ -47,6 +72,16 @@ def subtract(a: str, b: str):
 def multiply(a: str, b: str):
     """
     Multiply two numbers.
+
+    Parameters:
+    - a: First number
+    - b: Second number
+
+    Returns:
+    - JSON object containing the operation name, input values, and product
+
+    Raises:
+    - 422 error if either argument is not a valid number
     """
     try:
         a = float(a)
@@ -54,7 +89,7 @@ def multiply(a: str, b: str):
     except ValueError:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail="Both 'a' and 'b' must be valid numbers"
+            detail="Both 'a' and 'b' must be valid numbers."
         )
 
     return {"operation": "multiply", "a": a, "b": b, "result": a * b}
@@ -64,6 +99,17 @@ def multiply(a: str, b: str):
 def divide(a: str, b: str):
     """
     Divide the first number by the second number.
+
+    Parameters:
+    - a: First number
+    - b: Second number
+
+    Returns:
+    - JSON object containing the operation name, input values, and quotient
+
+    Raises:
+    - 422 error if either argument is not a valid number
+    - 422 error if the second number is zero
     """
     try:
         a = float(a)
@@ -71,7 +117,7 @@ def divide(a: str, b: str):
     except ValueError:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail="Both 'a' and 'b' must be valid numbers"
+            detail="Both 'a' and 'b' must be valid numbers."
         )
 
     if b == 0:
@@ -87,6 +133,17 @@ def divide(a: str, b: str):
 def average(a: str, b: str, c: str):
     """
     Calculate the average of three numbers.
+
+    Parameters:
+    - a: First number
+    - b: Second number
+    - c: Third number
+
+    Returns:
+    - JSON object containing the operation name, input values, and average
+
+    Raises:
+    - 422 error if any argument is not a valid number
     """
     try:
         a = float(a)
@@ -95,7 +152,7 @@ def average(a: str, b: str, c: str):
     except ValueError:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail="All arguments must be valid numbers"
+            detail="All arguments must be valid numbers."
         )
 
     return {"operation": "average", "a": a, "b": b, "c": c, "result": (a + b + c) / 3}
@@ -105,6 +162,16 @@ def average(a: str, b: str, c: str):
 def power(a: str, b: str):
     """
     Raise the first number to the power of the second number.
+
+    Parameters:
+    - a: Base number
+    - b: Exponent
+
+    Returns:
+    - JSON object containing the operation name, input values, and result of exponentiation
+
+    Raises:
+    - 422 error if either argument is not a valid number
     """
     try:
         a = float(a)
@@ -112,7 +179,7 @@ def power(a: str, b: str):
     except ValueError:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail="Both 'a' and 'b' must be valid numbers"
+            detail="Both 'a' and 'b' must be valid numbers."
         )
 
     return {"operation": "power", "a": a, "b": b, "result": a ** b}
@@ -122,6 +189,17 @@ def power(a: str, b: str):
 def percentage(part: str, whole: str):
     """
     Calculate what percentage the part is of the whole.
+
+    Parameters:
+    - part: The portion value
+    - whole: The total value
+
+    Returns:
+    - JSON object containing the operation name, input values, and percentage result
+
+    Raises:
+    - 422 error if either argument is not a valid number
+    - 422 error if the whole value is zero
     """
     try:
         part = float(part)
@@ -129,7 +207,7 @@ def percentage(part: str, whole: str):
     except ValueError:
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail="Both 'part' and 'whole' must be valid numbers"
+            detail="Both 'part' and 'whole' must be valid numbers."
         )
 
     if whole == 0:
